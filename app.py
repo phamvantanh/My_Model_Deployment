@@ -11,11 +11,11 @@ from werkzeug.utils import secure_filename, redirect
 from NumberPlateRecognition.code.Main1 import predict
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads/'
+# UPLOAD_FOLDER = 'static/uploads/'
 
-app.secret_key = "secret key"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+# app.secret_key = "secret key"
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -41,10 +41,10 @@ def upload_file():
         npimg = numpy.fromstring(file2, numpy.uint8)
         # convert numpy array to image
         img = cv2.imdecode(npimg, cv2.IMREAD_UNCHANGED)
-        path = os.path.join(app.config['UPLOAD_FOLDER']) + filename
+        # path = os.path.join(app.config['UPLOAD_FOLDER']) + filename
         # print(path)
         start = time.time()
-        cv2.imwrite(path, img)
+        # cv2.imwrite(path, img)
         try:
             string, plate = predict(img)
             print("ki tu: ", string)
@@ -62,14 +62,14 @@ def upload_file():
                 'image': img.decode('utf-8'),
                 'time': end - start
             }
-            return render_template('index.html', predict=return_data['bsx'], filename=filename)
+            return render_template('index.html', predict=return_data['bsx'],)
         return 'ok'
     return render_template('index.html')
 
 
-@app.route('/display/<filename>')
-def display_image(filename):
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+# @app.route('/display/<filename>')
+# def display_image(filename):
+#     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 if __name__ == '__main__':

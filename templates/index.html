@@ -29,11 +29,11 @@
 <div id="loading"></div>
 <div id="content">
     <h1>Upload and Predict Image</h1>
-    {% if filename %}
-        <div>
-            <img src="{{ url_for('display_image', filename=filename) }} " style="width:70%; height: 70%">
-        </div>
-    {% endif %}
+<!--    {% if filename %}-->
+<!--        <div>-->
+<!--            <img src="{{ url_for('display_image', filename=filename) }} " style="width:70%; height: 70%">-->
+<!--        </div>-->
+<!--    {% endif %}-->
     <form method="post" enctype="multipart/form-data">
       <input type="file" name="file1" class="form-control" autocomplete="off" required>
         <br>
